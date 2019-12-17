@@ -11,4 +11,10 @@
     tools:context=".FABActivity"
     tools:showIn="@layout/activity_fab">
 
+    <TextView
+        android:layout_marginTop="80dp"
+        android:id="@+id/textviewbuttonclicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="button clicked" />
 </LinearLayout>

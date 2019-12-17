@@ -23,7 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class FABActivity extends AppCompatActivity {
+public class FABActivity extends AppCompatActivity implements Example.BottomSheetListener {
+    private TextView mTextview;
 
 
     @Override
@@ -33,15 +34,18 @@ public class FABActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mTextview = findViewById(R.id.textviewbuttonclicked);
 
 
+
+        //il fab apre la bottomsheet
         FloatingActionButton fab = findViewById(R.id.grav);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FABActivity.this, "ciao", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FABActivity.this, "ciao", Toast.LENGTH_SHORT).show();
                 Example button = new Example();
-                button.show(getSupportFragmentManager(), "example");
+                button.show(getSupportFragmentManager(), "exampleBottomSheet");
 
             }
         });
@@ -49,4 +53,9 @@ public class FABActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onButtonClicked(String text) {
+        mTextview.setText(text);
+
+    }
 }

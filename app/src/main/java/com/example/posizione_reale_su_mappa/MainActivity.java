@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pos(View view) {
-        Intent i = new Intent(MainActivity.this, MapsActivity.class);
+        Intent i = new Intent(MainActivity.this, FABActivity.class);
         startActivity(i);
     }
 

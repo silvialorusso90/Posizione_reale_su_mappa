@@ -25,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mGoogleMap;
     MapView mMapView;
     View mView;
+    FloatingActionButton fab;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +51,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             mMapView.onCreate(null);
             mMapView.onResume();
             mMapView.getMapAsync(this);
-
         }
     }
 
@@ -58,7 +59,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         mGoogleMap = googleMap;
 
-        MapsInitializer.initialize(getContext());
+        //MapsInitializer.initialize(getContext());
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         //googleMap.setMyLocationEnabled(true);

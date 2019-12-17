@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.posizione_reale_su_mappa.Example;
 import com.example.posizione_reale_su_mappa.R;
 import com.example.posizione_reale_su_mappa.ui.home.HomeViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,38 +35,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-/*
-public class GalleryFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
-
-        return root;
-    }
-}
-
- */
-
-public class GalleryFragment extends Fragment implements OnMapReadyCallback {
+public class GalleryFragment extends Fragment implements OnMapReadyCallback, Example.BottomSheetListener{
 
     private HomeViewModel homeViewModel;
     private GoogleMap mMap;
     LocationManager locationManager;
     LocationListener locationListener;
     View mView;
+
+    private TextView mTextview;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -85,32 +64,26 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         mView = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map1);
-        mapFragment.getMapAsync(this);
-        return mView;
-    }
-    /*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_gallery);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mTextview = (TextView) mView.findViewById(R.id.textviewbuttonclicked);
+
+        final SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map1);
         mapFragment.getMapAsync(this);
 
-        FloatingActionButton fab = findViewById(R.id.grav);
+        FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Toast.makeText(getContext(), "ciao", Toast.LENGTH_SHORT).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                Example button = new Example();
+                button.show(getFragmentManager(), "open");
+
             }
         });
+        return mView;
     }
-
-     */
 
 
 
@@ -122,7 +95,6 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                //Toast.makeText(this, location.toString(), Toast.LENGTH_SHORT).show();
 
                 LatLng posizioneutente = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.clear();
@@ -180,4 +152,33 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    @Override
+    public void onButtonClicked(String text) {
+        mTextview.setText(text);
+    }
 }
+
+/*
+public class GalleryFragment extends Fragment {
+
+    private GalleryViewModel galleryViewModel;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        galleryViewModel =
+                ViewModelProviders.of(this).get(GalleryViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        /*final TextView textView = root.findViewById(R.id.text_gallery);
+        galleryViewModel.getText().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+            }
+        });
+
+
+        return root;
+    }
+}
+
+ */
